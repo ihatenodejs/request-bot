@@ -2,6 +2,9 @@
 A Telegram bot which takes requests for modules.lol
 
 # Setting up and self hosting
+## With Docker
+I'll add these instructions later!
+## The "Normal" way
 1. **Install dependancies**
 
    ```bash
