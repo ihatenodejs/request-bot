@@ -8,8 +8,8 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 const questions = [
     "Are you submitting an app (1) or a module (2)? You may only respond with 1 or 2.",
     "What is the name of the app or module?",
-    "Where can I find an icon of the app or module?",
-    "What is the GitHub/Source of the app or module?",
+    "Where can I find an icon of the app or module? If there is none, simply enter https://nothing.com",
+    "What is the GitHub/Source of the app or module? If there is none, simply enter https://nothing.com",
     "Do you have any other comments?"
 ];
 
