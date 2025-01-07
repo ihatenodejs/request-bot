@@ -69,7 +69,8 @@ bot.command('status', (ctx) => {
     if (userResponses[chatId] && userResponses[chatId].length > 0) {
         let responseText = '<b>My Requests:</b>\n\n';
         userResponses[chatId].forEach((request, index) => {
-            responseText += `[${index + 1}] ${request.status.toUpperCase()} - ${request.responses.name || 'N/A'}\n`;
+            const type = request.responses.type === '1' ? 'App' : 'Module';
+            responseText += `[${index + 1}] ${request.status.toUpperCase()} - ${type}: ${request.responses.name || 'N/A'}\n`;
         });
         responseText += '\nUse /check [id] to view the request.';
         ctx.replyWithHTML(responseText);
@@ -86,12 +87,14 @@ bot.command('check', (ctx) => {
         const requestId = parseInt(args[1]) - 1;
         if (userResponses[chatId] && userResponses[chatId][requestId]) {
             const request = userResponses[chatId][requestId];
+            const type = request.responses.type === '1' ? 'App' : 'Module';
             let responseText = `<b>My Request - #${requestId + 1}</b>\n\n`;
             responseText += `Timestamp: ${moment.unix(request.timestamp).format('MMMM Do YYYY, h:mm:ss a')}\n`;
             responseText += `Status: ${request.status}\n\n`;
             responseText += `Request:\n\n`;
             for (const [key, value] of Object.entries(request.responses)) {
-                responseText += `${key.charAt(0).toUpperCase() + key.slice(1)}: ${value || 'N/A'}\n`;
+                const displayValue = key === 'type' ? type : value;
+                responseText += `${key.charAt(0).toUpperCase() + key.slice(1)}: ${displayValue || 'N/A'}\n`;
             }
             ctx.replyWithHTML(responseText);
         } else {
@@ -114,7 +117,8 @@ bot.command('requests', (ctx) => {
         for (const [chatId, requests] of Object.entries(userResponses)) {
             const pendingRequests = requests.filter(request => request.status === 'pending').length;
             if (pendingRequests > 0) {
-                responseText += `[${index}] <b>${pendingRequests}</b> new requests from @${requests[0].username}\n`;
+                const type = requests[0].responses.type === '1' ? 'App' : 'Module';
+                responseText += `[${index}] <b>${pendingRequests}</b> new requests from @${requests[0].username} (${type})\n`;
                 userSummary[index] = { chatId, username: requests[0].username, totalRequests: requests.length, pendingRequests };
                 index++;
                 hasPendingRequests = true;
@@ -144,7 +148,8 @@ bot.command('view', (ctx) => {
         responseText += `Request Last Sent: ${lastRequestTime}\n\n`;
         userResponses[summary.chatId].forEach((request, index) => {
             if (request.status === 'pending') {
-                responseText += `[${index + 1}] ${request.responses.name || 'N/A'}\n`;
+                const type = request.responses.type === '1' ? 'App' : 'Module';
+                responseText += `[${index + 1}] ${type}: ${request.responses.name || 'N/A'}\n`;
             }
         });
         ctx.replyWithHTML(responseText);
@@ -153,12 +158,14 @@ bot.command('view', (ctx) => {
         const requestId = parseInt(args[2]) - 1;
         if (userResponses[chatId] && userResponses[chatId][requestId]) {
             const request = userResponses[chatId][requestId];
+            const type = request.responses.type === '1' ? 'App' : 'Module';
             let responseText = `<b>Request from @${request.username}</b>\n\n`;
             responseText += `Timestamp: ${moment.unix(request.timestamp).format('MMMM Do YYYY, h:mm:ss a')}\n`;
             responseText += `Status: ${request.status}\n\n`;
             responseText += `Request:\n\n`;
             for (const [key, value] of Object.entries(request.responses)) {
-                responseText += `${key.charAt(0).toUpperCase() + key.slice(1)}: ${value || 'N/A'}\n`;
+                const displayValue = key === 'type' ? type : value;
+                responseText += `${key.charAt(0).toUpperCase() + key.slice(1)}: ${displayValue || 'N/A'}\n`;
             }
             ctx.replyWithHTML(responseText);
         } else {
