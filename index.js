@@ -167,6 +167,8 @@ bot.command('view', (ctx) => {
                 const displayValue = key === 'type' ? type : value;
                 responseText += `${key.charAt(0).toUpperCase() + key.slice(1)}: ${displayValue || 'N/A'}\n`;
             }
+            responseText += `\nTo accept this request, use the command:\n<code>/accept ${chatId} ${requestId + 1}</code>\n`;
+            responseText += `To decline this request, use the command:\n<code>/decline ${chatId} ${requestId + 1}</code>`;
             ctx.replyWithHTML(responseText);
         } else {
             ctx.reply('Invalid user ID or request ID.');
