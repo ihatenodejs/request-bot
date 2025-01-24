@@ -27,15 +27,7 @@ jobs:
         run: docker build -t pontus-bot:latest .
 
       - name: Tag Docker Image
-        run: docker tag "pontus-bot:latest" "$SERVER_URL/$OWNER/$IMAGE_NAME:latest"
-        env:
-          SERVER_URL: ${{ secrets.SERVER_URL }}
-          OWNER: ${{ secrets.OWNER }}
-          IMAGE_NAME: ${{ secrets.IMAGE_NAME }}
+        run: docker tag "pontus-bot:latest" "https://git.pontusmail.org/aidan/request-bot:latest"
 
       - name: Push Docker Image
-        run: docker push "$SERVER_URL/$OWNER/$IMAGE_NAME:latest"
-        env:
-          SERVER_URL: ${{ secrets.SERVER_URL }}
-          OWNER: ${{ secrets.OWNER }}
-          IMAGE_NAME: ${{ secrets.IMAGE_NAME }}
+        run: docker push "https://git.pontusmail.org/aidan/request-bot:latest"
