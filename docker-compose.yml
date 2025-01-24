@@ -1,8 +1,5 @@
 services:
   request-bot:
-    build: .
-    ports:
-      - "3000:3000"
+    image: "git.pontusmail.org/aidan/request-bot:latest"
     volumes:
-      - .:/app
-    command: ["bun", "run", "index.js"]
+      - .env:/app/.env
