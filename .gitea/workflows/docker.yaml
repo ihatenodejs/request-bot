@@ -24,10 +24,7 @@ jobs:
           PACKAGE_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
 
       - name: Build Docker Image
-        run: docker build -t pontus-bot:latest .
-
-      - name: Tag Docker Image
-        run: docker tag "pontus-bot:latest" "https://git.pontusmail.org/aidan/request-bot:latest"
+        run: docker build -t git.pontusmail.org/aidan/pontus-bot:latest .
 
       - name: Push Docker Image
-        run: docker push "https://git.pontusmail.org/aidan/request-bot:latest"
+        run: docker push git.pontusmail.org/aidan/request-bot:latest
