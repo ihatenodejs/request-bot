@@ -27,13 +27,13 @@ jobs:
         run: docker build -t pontus-bot:latest .
 
       - name: Tag Docker Image
-        run: docker tag "$IMAGE_NAME:latest" "$GITEA_SERVER/$GITEA_OWNER/$IMAGE_NAME:latest"
+        run: docker tag "pontus-bot:latest" "$GITEA_SERVER/$GITEA_OWNER/pontus-bot:latest"
         env:
           SERVER_URL: ${{ secrets.SERVER_URL }}
           OWNER: ${{ secrets.OWNER }}
 
       - name: Push Docker Image
-        run: docker push "$GITEA_SERVER/$GITEA_OWNER/$IMAGE_NAME:latest"
+        run: docker push "$GITEA_SERVER/$GITEA_OWNER/pontus-bot:latest"
         env:
           SERVER_URL: ${{ secrets.SERVER_URL }}
           OWNER: ${{ secrets.OWNER }}
