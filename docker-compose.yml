@@ -3,3 +3,4 @@ services:
     image: "git.pontusmail.org/aidan/request-bot:latest"
     volumes:
       - .env:/app/.env
+    restart: always
