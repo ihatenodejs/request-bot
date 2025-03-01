@@ -1,8 +1,11 @@
 # request-bot
 
+[![Build and Push Docker Image](https://github.com/ihatenodejs/request-bot/actions/workflows/docker.yml/badge.svg)](https://github.com/ihatenodejs/request-bot/actions/workflows/docker.yml)
+[![Bump Dependencies](https://github.com/ihatenodejs/request-bot/actions/workflows/bump.yml/badge.svg)](https://github.com/ihatenodejs/request-bot/actions/workflows/bump.yml)
+
 A Telegram bot which takes requests for modules.lol
 
-## Setting up and self hosting
+## Setting up and self-hosting
 
 ### Using Docker
 

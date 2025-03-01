@@ -131,3 +131,9 @@ dist
 
 # database
 responses.json
+
+# bun
+bun.lockb
+
+# idea
+.idea/
